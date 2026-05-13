@@ -230,100 +230,126 @@ export default function App() {
                 </TabsList>
               </div>
 
-              <div className="flex-1 flex overflow-hidden relative">
-                {/* Editor Console */}
-                <TabsContent value="editor" className={`m-0 flex-1 min-w-0 md:min-w-[450px] ${isEditorMaximized ? "md:max-w-full" : (isSidebarVisible ? "md:max-w-[60%] lg:max-w-[55%]" : "md:max-w-[70%] lg:max-w-[65%]")} border-r border-zinc-200 dark:border-zinc-800 flex flex-col h-full bg-white dark:bg-zinc-950 md:!flex data-[state=inactive]:hidden md:data-[state=inactive]:flex transition-all duration-300`}>
-                  <div className="h-10 border-b border-zinc-200 dark:border-zinc-800 flex items-center px-4 bg-zinc-50/50 dark:bg-zinc-900 justify-between shrink-0">
-                    <div className="flex items-center gap-4">
-                      <div className="flex items-center gap-2 text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
-                        <Code2 className="w-3.5 h-3.5" />
-                        Sorgente
-                      </div>
-                      <Button 
-                        variant="ghost" 
-                        size="sm" 
-                        className="h-6 px-2 text-[8px] font-bold uppercase tracking-widest hidden md:flex items-center gap-1"
-                        onClick={() => setIsEditorMaximized(!isEditorMaximized)}
-                      >
-                        {isEditorMaximized ? (
-                          <><span>Contrai</span> <ChevronRight className="w-3 h-3 rotate-180" /></>
-                        ) : (
-                          <><span>Espandi</span> <ChevronRight className="w-3 h-3" /></>
-                        )}
-                      </Button>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <button 
-                        onClick={() => {
-                          navigator.clipboard.writeText(code);
-                          toast.success("Codice copiato");
-                        }}
-                        className="text-[10px] uppercase tracking-wider font-bold text-zinc-500 hover:text-zinc-800 transition-colors flex items-center gap-1"
-                      >
-                        <Copy className="w-3 h-3" />
-                        Copia
-                      </button>
-                      <button 
-                        onClick={() => setCode("")}
-                        className="text-[10px] uppercase tracking-wider font-bold text-red-500 hover:text-red-700 transition-colors flex items-center gap-1"
-                      >
-                        <Trash2 className="w-3 h-3" />
-                        Pulisci
-                      </button>
-                    </div>
-                  </div>
-                  <div className="flex-1 relative overflow-hidden">
-                    <CodeEditor code={code} onChange={(v) => setCode(v || "")} />
-                  </div>
-                </TabsContent>
-
-                {/* Preview Stage */}
-                <TabsContent value="preview" className={`m-0 flex-1 bg-zinc-100 dark:bg-zinc-950 flex flex-col overflow-hidden md:!flex ${isEditorMaximized ? "md:hidden" : ""} data-[state=inactive]:hidden md:data-[state=inactive]:flex`}>
-                   <div className="h-10 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between w-full px-6 bg-zinc-50/30 dark:bg-zinc-900 shrink-0">
-                      <div className="flex items-center gap-2 text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
-                        <Eye className="w-3.5 h-3.5" />
-                        Live Preview
-                      </div>
-                      <div className="flex items-center gap-3">
-                        {viewMode === "mobile" && (
-                          <div className="flex items-center gap-1 text-[8px] font-bold text-zinc-400 bg-zinc-200 dark:bg-zinc-800 px-2 py-0.5 rounded italic">
-                            {viewMode.toUpperCase()} VIEW
+                <div className="flex-1 flex overflow-hidden relative">
+                  {/* Desktop Layout: Split Editor and Preview */}
+                  <div className="hidden md:flex flex-1 overflow-hidden relative h-full w-full">
+                    {/* Editor Console */}
+                    <div className={`flex flex-col h-full bg-white dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800 transition-all duration-300 ${isEditorMaximized ? "w-full" : (isSidebarVisible ? "w-[45%] lg:w-[40%]" : "w-[55%] lg:w-[50%]")}`}>
+                      <div className="h-10 border-b border-zinc-200 dark:border-zinc-800 flex items-center px-4 bg-zinc-50/50 dark:bg-zinc-900 justify-between shrink-0">
+                        <div className="flex items-center gap-4">
+                          <div className="flex items-center gap-2 text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
+                            <Code2 className="w-3.5 h-3.5" />
+                            Sorgente
                           </div>
-                        )}
-                        <div className="flex items-center gap-1 text-[10px] text-green-500 font-bold uppercase tracking-widest">
-                          <div className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
-                          Live
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-6 px-2 text-[8px] font-bold uppercase tracking-widest flex items-center gap-1"
+                            onClick={() => setIsEditorMaximized(!isEditorMaximized)}
+                          >
+                            {isEditorMaximized ? (
+                              <><span>Contrai</span> <ChevronRight className="w-3 h-3 rotate-180" /></>
+                            ) : (
+                              <><span>Espandi</span> <ChevronRight className="w-3 h-3" /></>
+                            )}
+                          </Button>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <button 
+                            onClick={() => {
+                              navigator.clipboard.writeText(code);
+                              toast.success("Codice copiato");
+                            }}
+                            className="text-[10px] uppercase tracking-wider font-bold text-zinc-500 hover:text-zinc-800 transition-colors flex items-center gap-1"
+                          >
+                            <Copy className="w-3 h-3" />
+                            Copia
+                          </button>
+                          <button 
+                            onClick={() => setCode("")}
+                            className="text-[10px] uppercase tracking-wider font-bold text-red-500 hover:text-red-700 transition-colors flex items-center gap-1"
+                          >
+                            <Trash2 className="w-3 h-3" />
+                            Pulisci
+                          </button>
                         </div>
                       </div>
-                   </div>
+                      <div className="flex-1 relative overflow-hidden">
+                        <CodeEditor code={code} onChange={(v) => setCode(v || "")} />
+                      </div>
+                    </div>
 
-                   <div className="flex-1 overflow-auto bg-zinc-100 dark:bg-zinc-950/50 p-4 md:p-8 flex justify-center items-start">
-                     <div className={`transition-all duration-500 ease-in-out relative flex flex-col items-center ${viewMode === "mobile" ? "w-[320px] h-[560px] md:w-[375px] md:h-[667px]" : "w-full max-w-4xl h-[700px] lg:h-[800px]"}`}>
-                        <div className={`w-full h-full bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden relative group`}>
-                          <Preview code={code} />
-                          
-                          {/* Device Decorators for Mobile */}
-                          {viewMode === "mobile" && (
-                            <div className="absolute top-0 inset-x-0 h-4 md:h-6 bg-zinc-900 flex items-center justify-between px-4 md:px-6 pointer-events-none select-none z-10 font-sans">
-                              <span className="text-[8px] md:text-[10px] text-white font-medium">9:41</span>
-                              <div className="flex items-center gap-1.5">
-                                <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-white/20"></div>
-                                <div className="w-4 h-1 md:h-1.5 bg-white/20 rounded-full"></div>
-                              </div>
+                    {/* Preview Stage (Desktop) */}
+                    {!isEditorMaximized && (
+                      <div className="flex-1 bg-zinc-100 dark:bg-zinc-950 flex flex-col overflow-hidden">
+                        <div className="h-10 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between w-full px-6 bg-zinc-50/30 dark:bg-zinc-900 shrink-0">
+                          <div className="flex items-center gap-2 text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
+                            <Eye className="w-3.5 h-3.5" />
+                            Live Preview
+                          </div>
+                          <div className="flex items-center gap-1 text-[10px] text-green-500 font-bold uppercase tracking-widest">
+                            <div className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
+                            Live
+                          </div>
+                        </div>
+
+                        <div className="flex-1 overflow-auto bg-zinc-100 dark:bg-zinc-950/50 p-4 md:p-8 flex justify-center items-center">
+                          <div className={`transition-all duration-500 ease-in-out relative flex flex-col items-center ${viewMode === "mobile" ? "w-[320px] h-[560px] md:w-[375px] md:h-[667px]" : "w-full h-full max-w-5xl"}`}>
+                            <div className={`w-full h-full bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden relative group`}>
+                              <Preview code={code} />
+                              
+                              {viewMode === "mobile" && (
+                                <div className="absolute top-0 inset-x-0 h-4 md:h-6 bg-zinc-900 flex items-center justify-between px-4 md:px-6 pointer-events-none select-none z-10 font-sans">
+                                  <span className="text-[8px] md:text-[10px] text-white font-medium">9:41</span>
+                                  <div className="flex items-center gap-1.5">
+                                    <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-white/20"></div>
+                                    <div className="w-4 h-1 md:h-1.5 bg-white/20 rounded-full"></div>
+                                  </div>
+                                </div>
+                              )}
                             </div>
-                          )}
+                            {viewMode === "desktop" && (
+                              <div className="mt-4 text-center text-zinc-400 text-[10px] uppercase font-bold tracking-[0.2em] italic">
+                                Preview Rendered at 60 FPS
+                              </div>
+                            )}
+                          </div>
                         </div>
-                        <div className="mt-8 text-center text-zinc-400 text-[10px] uppercase font-bold tracking-[0.2em] animate-in fade-in slide-in-from-bottom-2 italic">
-                          Preview Rendered at 60 FPS
+                        
+                        <div className="p-3 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 text-[10px] text-zinc-400 font-medium uppercase tracking-widest flex items-center justify-center gap-4 shrink-0">
+                          <span className="flex items-center gap-1.5 italic"><Zap className="w-3 h-3 text-indigo-500" /> Tailwind v4 Engine</span>
                         </div>
-                     </div>
-                   </div>
-                   
-                   <div className="p-3 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 text-[10px] text-zinc-400 font-medium uppercase tracking-widest flex items-center justify-center gap-4 shrink-0">
-                     <span className="flex items-center gap-1.5 italic"><Zap className="w-3 h-3 text-indigo-500" /> Tailwind v4 Engine</span>
-                   </div>
-                </TabsContent>
-              </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Mobile Layout: Tabs */}
+                  <div className="flex md:hidden flex-1 flex-col overflow-hidden">
+                    <TabsContent value="editor" className="m-0 flex-1 flex flex-col h-full bg-white dark:bg-zinc-950">
+                      <div className="h-10 border-b border-zinc-200 dark:border-zinc-800 flex items-center px-4 bg-zinc-50/50 dark:bg-zinc-900 justify-between shrink-0">
+                        <div className="flex items-center gap-2 text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
+                          <Code2 className="w-3.5 h-3.5" />
+                          Sorgente
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <button onClick={() => { navigator.clipboard.writeText(code); toast.success("Codice copiato"); }} className="text-[10px] font-bold text-zinc-500 flex items-center gap-1"><Copy className="w-3 h-3" /> Copia</button>
+                          <button onClick={() => setCode("")} className="text-[10px] font-bold text-red-500 flex items-center gap-1"><Trash2 className="w-3 h-3" /> Pulisci</button>
+                        </div>
+                      </div>
+                      <div className="flex-1 relative overflow-hidden">
+                        <CodeEditor code={code} onChange={(v) => setCode(v || "")} />
+                      </div>
+                    </TabsContent>
+
+                    <TabsContent value="preview" className="m-0 flex-1 bg-zinc-100 dark:bg-zinc-950 flex flex-col overflow-hidden">
+                      <div className="flex-1 overflow-auto p-4 flex justify-center items-center h-full">
+                        <div className="w-full h-full bg-white dark:bg-zinc-900 rounded-2xl shadow-xl overflow-hidden relative">
+                           <Preview code={code} />
+                        </div>
+                      </div>
+                    </TabsContent>
+                  </div>
+                </div>
             </Tabs>
           </section>
         </main>
