@@ -1,0 +1,6 @@
+{
+  "name": "CardStudio",
+  "description": "Un editor di card in tempo reale con template, supporto per codice e anteprima live, ideale per social media e siti web.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
