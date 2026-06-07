@@ -421,6 +421,83 @@ export const templates: Template[] = [
     </div>
   </div>
 </div>`
-  }
+  }, 
+  {
+    id: "quaderno",
+    name: "Quaderno con anelli",
+    descritption: "Un quaderno con anelli superiori",
+    code: `<div class="relative rounded-[28px] border border-neutral-300 bg-white p-6 pt-12 shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
+      <!-- header quaderno -->
+      <div class="absolute inset-x-0 top-0 h-8 rounded-t-[28px] bg-[#dbeafe]"></div>
+
+      <!-- anelli -->
+      <div class="absolute left-10 top-0 h-6 w-4 -translate-y-1/2 rounded-full border-[3px] border-neutral-500 bg-neutral-100"></div>
+      <div class="absolute left-24 top-0 h-6 w-4 -translate-y-1/2 rounded-full border-[3px] border-neutral-500 bg-neutral-100"></div>
+      <div class="absolute left-38 top-0 h-6 w-4 -translate-y-1/2 rounded-full border-[3px] border-neutral-500 bg-neutral-100"></div>
+      <div class="absolute left-52 top-0 h-6 w-4 -translate-y-1/2 rounded-full border-[3px] border-neutral-500 bg-neutral-100"></div>
+
+      <div class="relative z-10">
+        <span class="mb-3 inline-block rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold text-sky-700">
+          Raccolta link
+        </span>
+
+        <h2 class="mb-4 text-xl font-bold text-neutral-800">
+          Quaderno ad anelli
+        </h2>
+
+        <div class="space-y-3">
+          <a href="#" class="block rounded-xl bg-neutral-50 px-4 py-3 text-neutral-700 ring-1 ring-neutral-200 transition hover:-translate-y-0.5 hover:bg-sky-50 hover:text-neutral-900 hover:ring-sky-200">
+            Portfolio
+          </a>
+          <a href="#" class="block rounded-xl bg-neutral-50 px-4 py-3 text-neutral-700 ring-1 ring-neutral-200 transition hover:-translate-y-0.5 hover:bg-sky-50 hover:text-neutral-900 hover:ring-sky-200">
+            Figma file
+          </a>
+          <a href="#" class="block rounded-xl bg-neutral-50 px-4 py-3 text-neutral-700 ring-1 ring-neutral-200 transition hover:-translate-y-0.5 hover:bg-sky-50 hover:text-neutral-900 hover:ring-sky-200">
+            Risorse studio
+          </a>
+        </div>
+      </div>
+    </div>`
+      },
+   {
+    id: "agenda",
+    name: "Agenda",
+    descritption: "Un foglio di agenda",
+    code:  `<div class="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
+
+    <!-- CARD 1: Block notes con i buchi -->
+    <div class="relative rounded-[28px] border border-neutral-300 bg-[#fffdf7] p-6 pl-10 shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
+      <!-- fascia sinistra -->
+      <div class="absolute inset-y-0 left-0 w-8 rounded-l-[28px] bg-[#f3efe3]"></div>
+
+      <!-- buchi -->
+      <div class="absolute left-2 top-8 h-3.5 w-3.5 rounded-full border border-neutral-300 bg-neutral-100"></div>
+      <div class="absolute left-2 top-20 h-3.5 w-3.5 rounded-full border border-neutral-300 bg-neutral-100"></div>
+      <div class="absolute left-2 top-32 h-3.5 w-3.5 rounded-full border border-neutral-300 bg-neutral-100"></div>
+      <div class="absolute left-2 top-44 h-3.5 w-3.5 rounded-full border border-neutral-300 bg-neutral-100"></div>
+
+      <div class="relative z-10">
+        <span class="mb-3 inline-block rounded-full bg-amber-200 px-3 py-1 text-xs font-semibold text-neutral-700">
+          Link utili
+        </span>
+
+        <h2 class="mb-4 text-xl font-bold text-neutral-800">
+          Block notes con fori
+        </h2>
+
+        <div class="space-y-3">
+          <a href="#" class="block rounded-xl border border-neutral-200 bg-white px-4 py-3 text-neutral-700 transition hover:-translate-y-0.5 hover:bg-amber-50 hover:text-neutral-900 hover:shadow-sm">
+            Dashboard progetto
+          </a>
+          <a href="#" class="block rounded-xl border border-neutral-200 bg-white px-4 py-3 text-neutral-700 transition hover:-translate-y-0.5 hover:bg-amber-50 hover:text-neutral-900 hover:shadow-sm">
+            Documentazione
+          </a>
+          <a href="#" class="block rounded-xl border border-neutral-200 bg-white px-4 py-3 text-neutral-700 transition hover:-translate-y-0.5 hover:bg-amber-50 hover:text-neutral-900 hover:shadow-sm">
+            Repository GitHub
+          </a>
+        </div>
+      </div>
+    </div>` 
+   }
 ];
 
